@@ -34,6 +34,9 @@ COLOUR_BG_LIGHT_BLUE="$ESCAPE[104m"
 COLOUR_BG_LIGHT_MAGENTA="$ESCAPE[105m"
 COLOUR_BG_LIGHT_CYAN="$ESCAPE[106m"
 COLOUR_BG_WHITE="$ESCAPE[107m"
+TEXT_CHECK="\xE2\x9C\x94"
+TEXT_CROSS="\xE2\x9C\x96"
+LINE_OFFSET=0
 
 function get_os {
   case "$OSTYPE" in
@@ -44,6 +47,57 @@ function get_os {
     msys*)    echo "WINDOWS" ;;
     *)        echo "unknown: $OSTYPE" ;;
   esac
+}
+
+function get_colour_string {
+	case "$1" in
+	black )
+	    echo "$COLOUR_TEXT_BLACK"
+	    ;;
+    red )
+        echo "$COLOUR_TEXT_RED"
+        ;;
+    green )
+        echo "$COLOUR_TEXT_GREEN"
+        ;;
+    yellow )
+        echo "$COLOUR_TEXT_YELLOW"
+        ;;
+    blue )
+        echo "$COLOUR_TEXT_BLUE"
+        ;;
+    magenta )
+        echo "$COLOUR_TEXT_MAGENTA"
+        ;;
+    cyan )
+        echo "$COLOUR_TEXT_CYAN"
+        ;;
+	reset )
+	    echo "$COLOUR_RESET"
+	    ;;
+	* )
+	    echo ""
+	    ;;
+  esac
+}
+
+function start {
+    if [ -z $2 ] || [ $2 -eq 1 ]
+    then
+        LINE_OFFSET=0
+    else
+        LINE_OFFSET=$((2*$(($2-1))))
+    fi
+
+    echo -e "\033["$LINE_OFFSET"C[ ] $1"
+}
+
+function success {
+    echo -e "\033[1A""\r""\033["$LINE_OFFSET"C"$COLOUR_TEXT_GREEN"["$TEXT_CHECK"]"$COLOUR_RESET
+}
+
+function error {
+    echo -e "\033[1A""\r""\033["$LINE_OFFSET"C"$COLOUR_TEXT_RED"["$TEXT_CROSS"]"$COLOUR_RESET
 }
 
 if (( UID != 0 )); then
