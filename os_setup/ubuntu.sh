@@ -26,6 +26,7 @@ sudo apt install -y dnsmasq
 sudo sh -c 'echo "address=/.dev/127.0.0.1" > /etc/dnsmasq.conf'
 sudo sh -c 'echo "nameserver 127.0.0.1" > /etc/resolv.conf'
 sudo systemctl start dnsmasq
+sudo apt install -y guake
 
 # Software
 sudo apt install -y chromium-browser
