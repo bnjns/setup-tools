@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Ensure that the DNS resolver is installed
+sudo apt install -y resolvconf
+sudo dpkg-reconfigure resolvconf
+sudo systemctl restart network-manager.service
+
 # Add any additional repos
 sudo wget -qO - https://wavebox.io/dl/client/repo/archive.key | sudo apt-key add -
 wget https://downloads.plex.tv/plex-keys/PlexSign.key -O - | sudo apt-key add -
