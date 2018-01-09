@@ -76,7 +76,7 @@ sudo systemctl start php5.6-fpm.service
 
 # SSH key
 mkdir -p /home/$USERNAME/.ssh
-ssh-keygen -t rsa -C "email@address.invalid"
+ssh-keygen -t rsa -C "email@address.invalid" -f /home/$USERNAME/.ssh/id_rsa
 ssh-add /home/$USERNAME/.ssh/id_rsa
 
 echo "PS1=\"\\h:\\w \\\\$ \"" >> /home/$USERNAME/.bashrc

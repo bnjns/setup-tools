@@ -127,8 +127,8 @@ brew services start php72
 sudo brew services start nginx
 
 # Set SSH key
-ssh-keygen -t rsa -C "email@address.invalid"
-ssh-add ~/.ssh/id_rsa
+ssh-keygen -t rsa -C "email@address.invalid" -f /Users/$USERNAME/.ssh/id_rsa
+ssh-add /Users/$USERNAME/.ssh/id_rsa
 
 # Set the default apps
 #!/bin/bash
