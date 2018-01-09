@@ -79,7 +79,7 @@ mkdir -p /home/$USERNAME/.ssh
 ssh-keygen -t rsa -C "email@address.invalid"
 ssh-add /home/$USERNAME/.ssh/id_rsa
 
-echo "PS1=\"\\w \\\\$ \"" >> ~/.bashrc
+echo "PS1=\"\\h:\\w \\\\$ \"" >> /home/$USERNAME/.bashrc
 
 # Tidy up default packages
 sudo apt remove -y rhythmbox

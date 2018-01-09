@@ -155,6 +155,8 @@ while IFS=$':' read bundle_id extension ; do
   fi
 done
 
+echo "PS1=\"\\h:\\w \\\\$ \"" >> /Users/$USERNAME/.bashrc
+
 # Clean up
 brew cleanup -s
 brew prune
