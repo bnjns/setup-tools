@@ -12,6 +12,7 @@ sudo add-apt-repository ppa:serge-rider/dbeaver-ce
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo add-apt-repository universe
+sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
 
 # Update the system
 sudo apt update
@@ -38,6 +39,7 @@ sudo apt install -y dbeaver-ce
 sudo apt install -y spotify-client
 sudo apt install -y vlc
 sudo apt install -y openvpn
+sudo apt install -y remmina remmina-plugin-rdp remmina-plugin-secret libfreerdp-plugins-standard
 modprobe tun
 
 # Let plex see the folders
