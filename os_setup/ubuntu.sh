@@ -28,6 +28,7 @@ sudo sh -c 'echo "nameserver 127.0.0.1" > /etc/resolv.conf'
 sudo systemctl start dnsmasq
 
 # Software
+sudo apt install -y firefox
 sudo apt install -y chromium-browser
 sudo apt install -y wavebox
 sudo apt install -y plexmediaserver
@@ -66,5 +67,8 @@ sudo systemctl start php7.0-fpm.service
 sudo systemctl start php5.6-fpm.service
 
 # SSH key
+mkdir -p /home/$USERNAME/.ssh
 ssh-keygen -t rsa -C "email@address.invalid"
-ssh-add ~/.ssh/id_rsa &> /dev/null
+ssh-add /home/$USERNAME/.ssh/id_rsa
+
+echo "PS1=\"\\w \\\\$ \"" >> ~/.bashrc

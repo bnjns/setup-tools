@@ -2,6 +2,7 @@
 
 source config.sh
 
+read -p "Enter your username: " USERNAME
 read -s -p "Enter your password: " PASSWORD
 echo
 
