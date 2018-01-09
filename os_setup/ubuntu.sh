@@ -80,3 +80,22 @@ ssh-keygen -t rsa -C "email@address.invalid"
 ssh-add /home/$USERNAME/.ssh/id_rsa
 
 echo "PS1=\"\\w \\\\$ \"" >> ~/.bashrc
+
+# Tidy up default packages
+sudo apt remove -y rhythmbox
+sudo apt remove -y caffeine
+sudo apt remove -y aisleriot
+sudo apt remove -y budgie-welcome
+sudo apt remove -y cheese
+sudo apt remove -y geary
+sudo apt remove -y gnome-mpv
+sudo apt remove -y gthumb
+sudo apt remove -y libreoffice*
+sudo apt remove -y gnome-mahjongg
+sudo apt remove -y transmission*
+sudo apt remove -y tilix
+sudo apt remove -y simple-scan
+sudo apt remove -y gnome-mines
+sudo apt remove -y gnome-calendar
+sudo apt clean
+sudo apt autoremove
