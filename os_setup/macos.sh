@@ -131,7 +131,6 @@ ssh-keygen -t rsa -C "email@address.invalid" -f /Users/$USERNAME/.ssh/id_rsa
 ssh-add /Users/$USERNAME/.ssh/id_rsa
 
 # Set the default apps
-#!/bin/bash
 { cat <<eof
 cx.c3.theunarchiver:gz
 cx.c3.theunarchiver:rar
