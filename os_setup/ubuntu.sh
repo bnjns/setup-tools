@@ -1,4 +1,5 @@
 #!/bin/bash
+source /etc/lsb-release
 
 # Ensure that the DNS resolver is installed
 sudo apt install -y resolvconf
@@ -18,6 +19,10 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo add-apt-repository universe
 sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
+sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$DISTRIB_RELEASE/ /' > /etc/apt/sources.list.d/albert.list"
+wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_17.10/Release.key -O Release.key
+sudo apt-key add - < Release.key
+sudo rm Release.key
 
 # Update the system
 sudo apt update
@@ -44,8 +49,9 @@ sudo apt install -y dbeaver-ce
 sudo apt install -y spotify-client
 sudo apt install -y vlc
 sudo apt install -y openvpn
-sudo apt install -y remmina remmina-plugin-rdp remmina-plugin-secret libfreerdp-plugins-standard
 modprobe tun
+sudo apt install -y remmina remmina-plugin-rdp remmina-plugin-secret libfreerdp-plugins-standard
+sudo apt install -y albert
 
 # Let plex see the folders
 sudo usermod -aG bnjns plex
