@@ -9,21 +9,19 @@ sleep 10
 
 # Add any additional repos
 sudo wget -qO - https://wavebox.io/dl/client/repo/archive.key | sudo apt-key add -
-wget https://downloads.plex.tv/plex-keys/PlexSign.key -O - | sudo apt-key add -
-echo "deb https://wavebox.io/dl/client/repo/ x86_64/" | sudo tee --append /etc/apt/sources.list.d/repo.list
-echo "deb https://downloads.plex.tv/repo/deb ./public main" | sudo tee -a /etc/apt/sources.list.d/plex.list
+sudo sh "echo 'deb https://wavebox.io/dl/client/repo/ x86_64/' > /etc/apt/sources.list.d/wavebox.list"
+sudo wget -qO https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
+sudo sh "echo 'deb https://downloads.plex.tv/repo/deb ./public main' > /etc/apt/sources.list.d/plex.list"
 sudo apt-add-repository -y ppa:ondrej/php
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 sudo add-apt-repository 'deb [arch=amd64,i386] http://mirrors.coreix.net/mariadb/repo/10.2/ubuntu zesty main'
-sudo add-apt-repository ppa:serge-rider/dbeaver-ce
+sudo add-apt-repository -y ppa:serge-rider/dbeaver-ce
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410
-echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo sh "echo 'deb http://repository.spotify.com stable non-free' > /etc/apt/sources.list.d/spotify.list"
 sudo add-apt-repository universe
 sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
+sudo wget -qO https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_17.10/Release.key -O Release.key | sudo apt-key add -
 sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$DISTRIB_RELEASE/ /' > /etc/apt/sources.list.d/albert.list"
-wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_17.10/Release.key -O Release.key
-sudo apt-key add - < Release.key
-sudo rm Release.key
 
 # Update the system
 sudo apt update
