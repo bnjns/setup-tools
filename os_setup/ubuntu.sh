@@ -102,5 +102,6 @@ sudo apt remove -y tilix
 sudo apt remove -y simple-scan
 sudo apt remove -y gnome-mines
 sudo apt remove -y gnome-calendar
+sudo apt remove -y gnome-sudoku
 sudo apt clean
 sudo apt autoremove
