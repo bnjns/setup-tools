@@ -5,6 +5,7 @@ source /etc/lsb-release
 sudo apt install -y resolvconf
 sudo dpkg-reconfigure resolvconf
 sudo systemctl restart network-manager.service
+sleep 10
 
 # Add any additional repos
 sudo wget -qO - https://wavebox.io/dl/client/repo/archive.key | sudo apt-key add -
@@ -36,7 +37,7 @@ sudo apt install -y git
 sudo apt install -y dnsmasq
 sudo sh -c 'echo "address=/.dev/127.0.0.1" > /etc/dnsmasq.conf'
 sudo sh -c 'echo "nameserver 127.0.0.1" > /etc/resolv.conf'
-sudo systemctl start dnsmasq
+sudo systemctl restart dnsmasq
 sudo apt install -y guake
 
 # Software
@@ -65,10 +66,10 @@ use mysql;
 CREATE USER 'bnjns'@'localhost' IDENTIFIED BY '$PASSWORD';
 GRANT ALL PRIVILEGES ON *.* TO 'bnjns'@'localhost' WITH GRANT OPTION;
 EOF
-sudo apt install -y php7.2 php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-mysql php7.2-mbstring               php7.2-zip php7.2-fpm
-sudo apt install -y php7.1 php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-fpm
-sudo apt install -y php7.0 php7.0-cli php7.0-common php7.0-json php7.0-opcache php7.0-mysql php7.0-mbstring php7.0-mcrypt php7.0-zip php7.0-fpm
-sudo apt install -y php5.6 php5.6-cli php5.6-common php5.6-json php5.6-opcache php5.6-mysql php5.6-mbstring php5.6-mcrypt php5.6-zip php5.6-fpm
+sudo apt install -y php7.2 php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-mysql php7.2-mbstring               php7.2-zip php7.2-fpm php7.2-xml
+sudo apt install -y php7.1 php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-fpm php7.1-xml
+sudo apt install -y php7.0 php7.0-cli php7.0-common php7.0-json php7.0-opcache php7.0-mysql php7.0-mbstring php7.0-mcrypt php7.0-zip php7.0-fpm php7.0-xml
+sudo apt install -y php5.6 php5.6-cli php5.6-common php5.6-json php5.6-opcache php5.6-mysql php5.6-mbstring php5.6-mcrypt php5.6-zip php5.6-fpm php5.6-xml
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt install -y nodejs
