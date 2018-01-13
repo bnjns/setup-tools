@@ -49,6 +49,17 @@ function get_os {
   esac
 }
 
+function get_linux_distrib {
+	OS=$(get_os)
+	if [ $OS = "LINUX" ]
+	then
+		. /etc/lsb-release
+		echo $DISTRIB_ID | tr '[:upper:]' '[:lower:]'
+	else
+		echo ""
+	fi
+}
+
 function get_colour_string {
 	case "$1" in
 	black )
@@ -100,6 +111,15 @@ function error {
     echo -e "\033[1A""\r""\033["$LINE_OFFSET"C"$COLOUR_TEXT_RED"["$TEXT_CROSS"]"$COLOUR_RESET
 }
 
+# Make sure the script is being run as root
 if (( UID != 0 )); then
     exec sudo -E "$0" ${1+"$@"}
+fi
+
+# Get the username running the script
+if [ $SUDO_USER ]
+then
+	USERNAME=$SUDO_USER
+else
+	USERNAME=`whoami`
 fi
