@@ -127,10 +127,6 @@ brew services start php71
 brew services start php72
 sudo brew services start nginx
 
-# Set SSH key
-ssh-keygen -t rsa -C "email@address.invalid" -f /Users/$USERNAME/.ssh/id_rsa
-ssh-add /Users/$USERNAME/.ssh/id_rsa
-
 # Set the default apps
 { cat <<eof
 cx.c3.theunarchiver:gz
@@ -154,9 +150,6 @@ while IFS=$':' read bundle_id extension ; do
     duti -s $bundle_id .$extension all
   fi
 done
-
-echo "PS1=\"\\h:\\w \\\\$ \"" >> /Users/$USERNAME/.bashrc
-echo "alias ll=\"ls -lAGH\"" >> /Users/$USERNAME/.bashrc
 
 # Clean up
 brew cleanup -s

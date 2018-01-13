@@ -1,5 +1,6 @@
 #!/bin/bash
-source "$(dirname $(readlink -f $0))/../config.sh"
+DIR_BASE="$(dirname $(readlink -f $0))/.."
+source "$DIR_BASE/config.sh"
 
 read -s -p "Enter your password: " PASSWORD
 echo
@@ -26,6 +27,15 @@ case $OS in
 		exit 1;
 		;;
 esac
+
+# Set up .bashrc file
+echo "PS1=\"\\h:\\w \\\\$ \"" >> $HOME/.bashrc
+echo "alias ll=\"ls -lAGH\"" >> $HOME/.bashrc
+
+# Set SSH key
+mkdir -p $HOME/.ssh
+ssh-keygen -t rsa -C "email@address.invalid" -f $HOME/.ssh/id_rsa -N ""
+ssh-add $HOME/.ssh/id_rsa
 
 # TODO: Restore backups
 # TODO: Enable sites

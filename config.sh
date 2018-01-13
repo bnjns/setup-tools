@@ -1,4 +1,5 @@
 #!/bin/bash
+if [ -z $DIR_BASE ]; then DIR_BASE=$(dirname $(readlink -f $0)); fi
 
 ESCAPE="\033"
 COLOUR_RESET="$ESCAPE[0m"
@@ -112,14 +113,7 @@ function error {
 }
 
 # Make sure the script is being run as root
-if (( UID != 0 )); then
-    exec sudo -E "$0" ${1+"$@"}
-fi
+if (( UID != 0 )); then exec sudo -E "$0" ${1+"$@"}; fi
 
 # Get the username running the script
-if [ $SUDO_USER ]
-then
-	USERNAME=$SUDO_USER
-else
-	USERNAME=`whoami`
-fi
+if [ $SUDO_USER ]; then USERNAME=$SUDO_USER; else USERNAME=$(whoami); fi
