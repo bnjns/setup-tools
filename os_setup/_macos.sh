@@ -156,6 +156,7 @@ while IFS=$':' read bundle_id extension ; do
 done
 
 echo "PS1=\"\\h:\\w \\\\$ \"" >> /Users/$USERNAME/.bashrc
+echo "alias ll=\"ls -lAGH\"" >> /Users/$USERNAME/.bashrc
 
 # Clean up
 brew cleanup -s
