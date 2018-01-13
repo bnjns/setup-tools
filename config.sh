@@ -53,7 +53,7 @@ function getOS
 
 function getLinuxDistribution
 {
-	OS=$(getOS)
+	local OS=$(getOS)
 	if [ $OS = "LINUX" ]; then
 		. /etc/lsb-release
 		echo $DISTRIB_ID | tr '[:lower:]' '[:upper:]'
@@ -64,8 +64,8 @@ function getLinuxDistribution
 
 function getFullOS
 {
-	OS=$(getOS)
-	DISTRIB=$(getLinuxDistribution)
+	local OS=$(getOS)
+	local DISTRIB=$(getLinuxDistribution)
 	if  [ -z $DISTRIB ]; then
 		echo $OS
 	else
