@@ -1,5 +1,5 @@
 #!/bin/bash
-source ../config.sh
+source "$(dirname $(readlink -f $0))/../config.sh"
 
 read -s -p "Enter your password: " PASSWORD
 echo
