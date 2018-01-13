@@ -53,6 +53,7 @@ sudo apt install -y openvpn
 sudo apt install -y remmina remmina-plugin-rdp remmina-plugin-secret libfreerdp-plugins-standard
 sudo apt install -y albert
 sudo apt install -y virtualbox-5.2
+sudo apt install -y texmaker
 
 # Web server
 sudo apt install -y nginx
