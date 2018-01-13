@@ -1,16 +1,14 @@
 #!/bin/bash
-DIR_BASE="$(dirname $(readlink -f $0))/.."
+DIR_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 source "$DIR_BASE/config.sh"
 
-read -s -p "Enter your password: " PASSWORD
-echo
+echo -n "Enter your password: "
+read -s PASSWORD
 
-OS=$(get_os)
 case $OS in
 	LINUX )
-		DISTRIB=$(get_linux_distrib)
 		case $DISTRIB in
-			ubuntu )
+			UBUNTU )
 				source _linux_ubuntu.sh
 				;;
 			* )

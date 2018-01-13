@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z $DIR_BASE ]; then DIR_BASE=$(dirname $(readlink -f $0)); fi
+if [ -z $DIR_BASE ]; then DIR_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"; fi
 
 ESCAPE="\033"
 COLOUR_RESET="$ESCAPE[0m"
@@ -39,29 +39,50 @@ TEXT_CHECK="\xE2\x9C\x94"
 TEXT_CROSS="\xE2\x9C\x96"
 LINE_OFFSET=0
 
-function get_os {
+function getOS
+{
   case "$OSTYPE" in
     solaris*) echo "SOLARIS" ;;
     darwin*)  echo "OSX" ;;
     linux*)   echo "LINUX" ;;
     bsd*)     echo "BSD" ;;
     msys*)    echo "WINDOWS" ;;
-    *)        echo "unknown: $OSTYPE" ;;
+    *)        echo "UNKNOWN" ;;
   esac
 }
 
-function get_linux_distrib {
-	OS=$(get_os)
-	if [ $OS = "LINUX" ]
-	then
+function getLinuxDistribution
+{
+	OS=$(getOS)
+	if [ $OS = "LINUX" ]; then
 		. /etc/lsb-release
-		echo $DISTRIB_ID | tr '[:upper:]' '[:lower:]'
+		echo $DISTRIB_ID | tr '[:lower:]' '[:upper:]'
 	else
 		echo ""
 	fi
 }
 
-function get_colour_string {
+function getFullOS
+{
+	OS=$(getOS)
+	DISTRIB=$(getLinuxDistribution)
+	if  [ -z $DISTRIB ]; then
+		echo $OS
+	else
+		echo $OS"_"$DISTRIB
+	fi
+}
+
+function inArray
+{
+	local e match="$1"
+	shift
+	for e; do [[ "$e" == "$match" ]] && return 0; done
+	return 1
+}
+
+function getColourString
+{
 	case "$1" in
 	black )
 	    echo "$COLOUR_TEXT_BLACK"
@@ -93,7 +114,8 @@ function get_colour_string {
   esac
 }
 
-function start {
+function start
+{
     if [ -z $2 ] || [ $2 -eq 1 ]
     then
         LINE_OFFSET=0
@@ -104,11 +126,13 @@ function start {
     echo -e "\033["$LINE_OFFSET"C[ ] $1"
 }
 
-function success {
+function success
+{
     echo -e "\033[1A""\r""\033["$LINE_OFFSET"C"$COLOUR_TEXT_GREEN"["$TEXT_CHECK"]"$COLOUR_RESET
 }
 
-function error {
+function error
+{
     echo -e "\033[1A""\r""\033["$LINE_OFFSET"C"$COLOUR_TEXT_RED"["$TEXT_CROSS"]"$COLOUR_RESET
 }
 
@@ -117,3 +141,8 @@ if (( UID != 0 )); then exec sudo -E "$0" ${1+"$@"}; fi
 
 # Get the username running the script
 if [ $SUDO_USER ]; then USERNAME=$SUDO_USER; else USERNAME=$(whoami); fi
+
+# Get the OS
+OS=$(getOS)
+DISTRIB=$(getLinuxDistribution)
+OS_FULL=$(getFullOS)

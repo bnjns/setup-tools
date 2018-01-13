@@ -1,14 +1,13 @@
 #!/bin/bash
 source config.sh
 
-if [ -z "$1" ]
-then
+if [ -z "$1" ]; then
     read -p "Enter the domain name: " DOMAIN
 else
     DOMAIN=$1
 fi
 
-OS=$(get_os)
+OS=$(getOS)
 case "$OS" in
     LINUX* ) DIR=/etc;;
     OSX* )   DIR=/usr/local/etc;;
@@ -17,6 +16,7 @@ case "$OS" in
         exit 1
 esac
 
+start "Creating $DIR/openssl/certs/$DOMAIN.crt"
 
 mkdir -p "$DIR/openssl"
 mkdir -p "$DIR/openssl/certs"
@@ -46,7 +46,7 @@ openssl req \
   -keyout $DIR/openssl/certs/$DOMAIN.key \
   -out $DIR/openssl/certs/$DOMAIN.crt \
   -config $DIR/openssl/openssl_tmp.cnf &> /dev/null
-
-echo -e "$DIR/openssl/certs/$DOMAIN.crt created."
-
+  
 rm $DIR/openssl/openssl_tmp.cnf
+
+success
