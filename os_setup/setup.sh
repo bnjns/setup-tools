@@ -2,8 +2,9 @@
 DIR_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 source "$DIR_BASE/config.sh"
 
-echo -n "Enter your password: "
+echo -ne $COLOUR_TEXT_YELLOW"Enter your password: "$COLOUR_RESET
 read -s PASSWORD
+echo
 
 case $OS in
 	LINUX )
