@@ -51,6 +51,7 @@ brew cask install bartender
 mas install 836505650 # Battery Monitor
 brew cask install discord
 brew cask install google-chrome
+brew cask install google-backup-and-sync
 brew cask install firefox
 brew cask install hazel
 brew cask install iterm2
