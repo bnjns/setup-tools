@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 DIR_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 source "$DIR_BASE/config.sh"
 
@@ -10,7 +11,7 @@ case $OS in
 	LINUX )
 		case $DISTRIB in
 			UBUNTU )
-				source _linux_ubuntu.sh
+				source "$DIR_BASE/os_setup/_linux_ubuntu.sh"
 				;;
 			* )
 				echo -e $COLOUR_TEXT_RED"ERROR: This Linux distribution is currently not supported."$COLOUR_RESET
@@ -19,7 +20,7 @@ case $OS in
 		esac
 		;;
 	OSX )
-		source _macos.sh
+		source "$DIR_BASE/os_setup/_macos.sh"
 		;;
 	* )
 		echo -e $COLOUR_TEXT_RED"ERROR: This operating system is currently not supported."$COLOUR_RESET

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 if [ -z $DIR_BASE ]; then DIR_BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"; fi
 
 ESCAPE="\033"
@@ -146,3 +147,24 @@ if [ $SUDO_USER ]; then USERNAME=$SUDO_USER; else USERNAME=$(whoami); fi
 OS=$(getOS)
 DISTRIB=$(getLinuxDistribution)
 OS_FULL=$(getFullOS)
+
+# Set any necessary directories
+case "$OS" in
+	LINUX )
+		DIR_ETC="/etc"
+		DIR_BIN="/usr/bin"
+		DIR_OPT="/opt"
+		;;
+	OSX )
+		DIR_ETC="/usr/local/etc"
+		DIR_BIN="/usr/local/bin"
+		DIR_OPT="/opt"
+		;;
+	* )
+		DIR_ETC=""
+		DIR_BIN=""
+		DIR_OPT=""
+		echo -e $COLOUR_TEXT_YELLOW"Warning: "$COLOUR_RESET"Unsupported Operating System '$OS'."
+		exit 1
+		;;
+esac

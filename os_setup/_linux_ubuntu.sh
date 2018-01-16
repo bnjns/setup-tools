@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 source /etc/lsb-release
 
 # Ensure that the DNS resolver is installed
@@ -54,6 +55,9 @@ sudo apt install -y remmina remmina-plugin-rdp remmina-plugin-secret libfreerdp-
 sudo apt install -y albert
 sudo apt install -y virtualbox-5.2
 sudo apt install -y texmaker
+wget -qO - https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.6.2914.tar.gz | tar -C ~/Downloads/ --strip-components=1 -xz -f -
+~/Downloads/jetbrains-toolbox
+rm ~/Downloads/jetbrains-toolbox
 
 # Web server
 sudo apt install -y nginx

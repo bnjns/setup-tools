@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 source config.sh
 
 if [ -z "$1" ]; then
@@ -7,20 +7,11 @@ else
     DOMAIN=$1
 fi
 
-OS=$(getOS)
-case "$OS" in
-    LINUX* ) DIR=/etc;;
-    OSX* )   DIR=/usr/local/etc;;
-    * )
-        echo -e $COLOUR_TEXT_RED"ERROR: Operating system '$OS' not supported."$COLOUR_RESET
-        exit 1
-esac
+start "Creating SSL certificate and key"
 
-start "Creating $DIR/openssl/certs/$DOMAIN.crt"
-
-mkdir -p "$DIR/openssl"
-mkdir -p "$DIR/openssl/certs"
-cat > $DIR/openssl/openssl_tmp.cnf <<-EOF
+mkdir -p "$DIR_ETC/openssl"
+mkdir -p "$DIR_ETC/openssl/certs"
+cat > $DIR_ETC/openssl/openssl_tmp.cnf <<-EOF
   [req]
   distinguished_name = req_distinguished_name
   x509_extensions = v3_req
@@ -43,10 +34,12 @@ openssl req \
   -days 3650 \
   -nodes \
   -x509 \
-  -keyout $DIR/openssl/certs/$DOMAIN.key \
-  -out $DIR/openssl/certs/$DOMAIN.crt \
-  -config $DIR/openssl/openssl_tmp.cnf &> /dev/null
+  -keyout $DIR_ETC/openssl/certs/$DOMAIN.key \
+  -out $DIR_ETC/openssl/certs/$DOMAIN.crt \
+  -config $DIR_ETC/openssl/openssl_tmp.cnf &> /dev/null
   
-rm $DIR/openssl/openssl_tmp.cnf
+rm $DIR_ETC/openssl/openssl_tmp.cnf
 
 success
+echo "      > $DIR_ETC/openssl/certs/$DOMAIN.crt"
+echo "      > $DIR_ETC/openssl/certs/$DOMAIN.key"

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # Ensure xcode command line tools are installed
 xcode-select --install
 
