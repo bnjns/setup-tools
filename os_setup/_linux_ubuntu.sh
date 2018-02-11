@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!/bin/bash
 source /etc/lsb-release
 
 # Ensure that the DNS resolver is installed
@@ -25,6 +24,8 @@ sudo wget -qO - "https://download.opensuse.org/repositories/home:manuelschneid3r
 sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$DISTRIB_RELEASE/ /' > /etc/apt/sources.list.d/albert.list"
 sudo wget -qO - https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo apt-key add -
 sudo sh -c "echo 'deb http://download.virtualbox.org/virtualbox/debian $DISTRIB_CODENAME contrib' > /etc/apt/sources.list.d/virtualbox.list"
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/chrome.list'
 
 # Update the system
 sudo apt update
@@ -43,7 +44,7 @@ sudo apt install -y guake
 
 # Software
 sudo apt install -y firefox
-sudo apt install -y chromium-browser
+sudo apt install -y google-chrome-stable
 sudo apt install -y wavebox
 sudo apt install -y plexmediaserver
 sudo apt install -y filezilla
@@ -55,6 +56,7 @@ sudo apt install -y remmina remmina-plugin-rdp remmina-plugin-secret libfreerdp-
 sudo apt install -y albert
 sudo apt install -y virtualbox-5.2
 sudo apt install -y texmaker
+sudo apt install -y gparted
 wget -qO - https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.6.2914.tar.gz | tar -C ~/Downloads/ --strip-components=1 -xz -f -
 ~/Downloads/jetbrains-toolbox
 rm ~/Downloads/jetbrains-toolbox
@@ -102,6 +104,10 @@ sudo apt remove -y gnome-sudoku
 sudo apt clean
 sudo apt autoremove
 
+# Add the necessary startup applications
+sudo mkdir -p /mnt/plex
+sudo mkdir -p /mnt/Data
+
 # Let plex see the drive
 sudo usermod -aG bnjns plex
-sudo chmod -R 775 /media/bnjns
+sudo chmod -R 775 /mnt/plex
