@@ -128,6 +128,9 @@ brew services start php71
 brew services start php72
 sudo brew services start nginx
 
+# Enable pip as a direct command
+echo 'alias pip="python2 -m pip"' >> ~/.bashrc
+
 # Set the default apps
 { cat <<eof
 cx.c3.theunarchiver:gz

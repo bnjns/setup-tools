@@ -101,6 +101,7 @@ sudo apt remove -y simple-scan
 sudo apt remove -y gnome-mines
 sudo apt remove -y gnome-calendar
 sudo apt remove -y gnome-sudoku
+sudo apt remove -y gnome-shell-extension-ubuntu-dock
 sudo apt clean
 sudo apt autoremove
 
