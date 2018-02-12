@@ -1,5 +1,7 @@
 #!/bin/bash
 source /etc/lsb-release
+EXTENSION_TMP_DIR=/home/$USERNAME/gnome-extensions
+EXTENSION_DIR=/home/$USERNAME/.local/share/gnome-shell/extensions/
 
 # Ensure that the DNS resolver is installed
 sudo apt install -y resolvconf
@@ -41,6 +43,7 @@ sudo sh -c 'echo "address=/.dev/127.0.0.1" > /etc/dnsmasq.conf'
 sudo sh -c 'echo "nameserver 127.0.0.1" > /etc/resolv.conf'
 sudo systemctl restart dnsmasq
 sudo apt install -y guake
+sudo apt install ttf-mscorefonts-installer
 
 # Software
 sudo apt install -y firefox
@@ -112,3 +115,18 @@ sudo mkdir -p /mnt/Data
 # Let plex see the drive
 sudo usermod -aG bnjns plex
 sudo chmod -R 775 /mnt/plex
+
+# Enable auto mounting of the desktop drives
+#sudo sh -c 'echo "/dev/disk/by-uuid/0073B0C03D070BC8 /mnt/Data ntfs  rw,auto,user,fmask=0111,dmask=0000,nofail 0 0" >> /etc/fstab'
+#sudo sh -c 'echo "/dev/disk/by-uuid/57D5-2763        /mnt/plex exfat rw,auto,user,fmask=0111,dmask=0000,nofail 0 0" >> /etc/fstab'
+# Enable auto mounting of the laptop drives
+#sudo sh -c 'echo "/dev/disk/by-uuid/5A50-DDC5        /mnt/Data exfat rw,auto,user,fmask=0111,dmask=0000,nofail 0 0" >> /etc/fstab'
+
+# Install various GNOME extensions
+#mkdir -p $EXTENSION_TMP_DIR
+mkdir -p $EXTENSION_DIR
+sh $DIR_BASE/gnome-extension-manager --install --extension-id 964
+sh $DIR_BASE/gnome-extension-manager --install --extension-id 1253
+sh $DIR_BASE/gnome-extension-manager --install --extension-id 545
+sh $DIR_BASE/gnome-extension-manager --install --extension-id 7
+sh $DIR_BASE/gnome-extension-manager --install --extension-id 937
