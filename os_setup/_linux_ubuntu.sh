@@ -120,8 +120,8 @@ sudo usermod -aG bnjns plex
 sudo chmod -R 775 /mnt/plex
 
 # Enable auto mounting of the desktop drives
-#sudo sh -c 'echo "/dev/disk/by-uuid/0073B0C03D070BC8 /mnt/Data ntfs  rw,auto,user,fmask=0111,dmask=0000,nofail 0 0" >> /etc/fstab'
-#sudo sh -c 'echo "/dev/disk/by-uuid/57D5-2763        /mnt/plex exfat rw,auto,user,fmask=0111,dmask=0000,nofail 0 0" >> /etc/fstab'
+#sudo sh -c 'echo "/dev/disk/by-uuid/0073B0C03D070BC8 /mnt/Data ntfs  rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096,uhelper=udisks2,nofail 0 0" >> /etc/fstab'
+#sudo sh -c 'echo "/dev/disk/by-uuid/57D5-2763        /mnt/plex exfat rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096,uhelper=udisks2,nofail 0 0" >> /etc/fstab'
 # Enable auto mounting of the laptop drives
 #sudo sh -c 'echo "/dev/disk/by-uuid/5A50-DDC5        /mnt/Data exfat rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096,uhelper=udisks2,nofail 0 0" >> /etc/fstab'
 
