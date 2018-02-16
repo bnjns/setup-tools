@@ -28,6 +28,7 @@ sudo wget -qO - https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo 
 sudo sh -c "echo 'deb http://download.virtualbox.org/virtualbox/debian $DISTRIB_CODENAME contrib' > /etc/apt/sources.list.d/virtualbox.list"
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/chrome.list'
+sudo add-apt-repository ppa:dyatlov-igor/materia-theme
 
 # Update the system
 sudo apt update
@@ -45,6 +46,7 @@ sudo systemctl restart dnsmasq
 sudo apt install -y guake
 sudo apt install -y ttf-mscorefonts-installer
 sudo apt install -y libnss3-tools
+sudo apt install -y gnome-shell-extensions
 
 # Software
 sudo apt install -y firefox
@@ -135,3 +137,6 @@ sh $DIR_BASE/gnome-extension-manager --install --extension-id 937
 # Set up the SSL database
 mkdir -p ~/.pki && mkdir -p ~/.pki/nssdb
 certutil -d sql:$HOME/.pki/nssdb -N
+
+# Install the themes
+sudo apt install -y materia-theme
