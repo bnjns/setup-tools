@@ -43,7 +43,8 @@ sudo sh -c 'echo "address=/.dev/127.0.0.1" > /etc/dnsmasq.conf'
 sudo sh -c 'echo "nameserver 127.0.0.1" > /etc/resolv.conf'
 sudo systemctl restart dnsmasq
 sudo apt install -y guake
-sudo apt install ttf-mscorefonts-installer
+sudo apt install -y ttf-mscorefonts-installer
+sudo apt install -y libnss3-tools
 
 # Software
 sudo apt install -y firefox
@@ -130,3 +131,7 @@ sh $DIR_BASE/gnome-extension-manager --install --extension-id 1253
 sh $DIR_BASE/gnome-extension-manager --install --extension-id 545
 sh $DIR_BASE/gnome-extension-manager --install --extension-id 7
 sh $DIR_BASE/gnome-extension-manager --install --extension-id 937
+
+# Set up the SSL database
+mkdir -p ~/.pki && mkdir -p ~/.pki/nssdb
+certutil -d sql:$HOME/.pki/nssdb -N

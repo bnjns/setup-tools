@@ -19,7 +19,8 @@ cat > $DIR_ETC/openssl/openssl_tmp.cnf <<-EOF
   [req_distinguished_name]
   CN = *.$DOMAIN
   [v3_req]
-  keyUsage = keyEncipherment, dataEncipherment
+  basicConstraints = CA:FALSE
+  keyUsage = nonRepudiation, digitalSignature, keyEncipherment
   extendedKeyUsage = serverAuth
   subjectAltName = @alt_names
   [alt_names]
@@ -43,3 +44,9 @@ rm $DIR_ETC/openssl/openssl_tmp.cnf
 success
 echo "      > $DIR_ETC/openssl/certs/$DOMAIN.crt"
 echo "      > $DIR_ETC/openssl/certs/$DOMAIN.key"
+
+if [ $OS="LINUX" ]; then
+	start "Adding to database"
+	certutil -d sql:$HOME/.pki/nssdb -A -t "Pu,," -n $DOMAIN -i "$DIR_ETC/openssl/certs/$DOMAIN.crt" &> /dev/null   
+	success
+fi
