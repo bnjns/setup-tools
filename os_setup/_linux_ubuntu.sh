@@ -133,6 +133,8 @@ sh $DIR_BASE/gnome-extension-manager --install --extension-id 1253
 sh $DIR_BASE/gnome-extension-manager --install --extension-id 545
 sh $DIR_BASE/gnome-extension-manager --install --extension-id 7
 sh $DIR_BASE/gnome-extension-manager --install --extension-id 937
+sh $DIR_BASE/gnome-extension-manager --install --extension-id 904
+sh $DIR_BASE/gnome-extension-manager --install --extension-id 1228
 
 # Set up the SSL database
 mkdir -p ~/.pki && mkdir -p ~/.pki/nssdb

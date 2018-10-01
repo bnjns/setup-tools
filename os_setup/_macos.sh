@@ -15,7 +15,6 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 # Tap repositories
 brew tap homebrew/dupes
 brew tap homebrew/versions
-brew tap homebrew/php
 brew tap homebrew/apache
 brew tap homebrew/services
 brew tap caskroom/cask
@@ -43,8 +42,6 @@ mas signin ben.jones27@gmail.com
 wget -O ~/MacTeX.pkg http://tug.org/cgi-bin/mactex-download/MacTeX.pkg
 sudo installer -pkg ~/MacTex.pkg -target /
 rm ~/MacTeX.pkg
-brew install zsh zsh-completions
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Software
 brew cask install alfred
@@ -63,7 +60,6 @@ brew cask install microsoft-office
 mas install 1295203466 # Remote Desktop
 mas install 1055273043 # PDF Expert
 brew cask install jetbrains-toolbox
-brew cask install https://raw.githubusercontent.com/caskroom/homebrew-cask/9e48616f20a9f9bf87015edd644876f9f9619115/Casks/qlab.rb
 brew cask install sequel-pro
 brew cask install spotify
 brew cask install spotify-notifications
@@ -80,21 +76,28 @@ sudo apachectl stop
 sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist
 brew install nginx
 brew install mariadb
-brew install php55 --with-libmysql php55-mcrypt php55-xdebug
-brew install -s php55-imagick
-brew unlink php55
-brew install php56 --with-libmysql php56-mcrypt php56-xdebug
-brew install -s php56-imagick
-brew unlink php56
-brew install php70 php70-mcrypt php70-opcache php70-apcu php70-xdebug
-brew install -s php70-imagick
-brew unlink php70 &> /dev/null
-brew install php71 php71-mcrypt php71-opcache php71-apcu php71-xdebug
-brew install -s php71-imagick
-brew install php72 php72-mcrypt php72-opcache php72-apcu php72-xdebug
-brew install -s php72-imagick
-brew install xdebug-osx
-xdebug-toggle off --no-server-restart
+brew install php@5.6 php@7.0 php@7.1 php@7.2
+ln -s /usr/local/opt/php@5.6/bin/php /usr/local/bin/php56
+ln -s /usr/local/opt/php@7.0/bin/php /usr/local/bin/php70
+ln -s /usr/local/opt/php@7.1/bin/php /usr/local/bin/php71
+ln -s /usr/local/opt/php@7.2/bin/php /usr/local/bin/php72
+ln -s /usr/local/opt/php@5.6/bin/pecl /usr/local/bin/pecl56
+ln -s /usr/local/opt/php@7.0/bin/pecl /usr/local/bin/pecl70
+ln -s /usr/local/opt/php@7.1/bin/pecl /usr/local/bin/pecl71
+ln -s /usr/local/opt/php@7.2/bin/pecl /usr/local/bin/pecl72
+ln -s /usr/local/opt/php@5.6/bin/pear /usr/local/bin/pear56
+ln -s /usr/local/opt/php@7.0/bin/pear /usr/local/bin/pear70
+ln -s /usr/local/opt/php@7.1/bin/pear /usr/local/bin/pear71
+ln -s /usr/local/opt/php@7.2/bin/pear /usr/local/bin/pear72
+pecl70 install apcu
+pecl70 install imagick
+pecl70 install xdebug
+pecl71 install apcu
+pecl71 install imagick
+pecl71 install xdebug
+pecl72 install apcu
+pecl72 install imagick
+pecl72 install xdebug
 brew install node
 wget https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
@@ -102,9 +105,7 @@ sudo mv phpunit.phar /usr/local/bin/phpunit
 brew install composer
 
 # Configuring web software
-cp $(brew --prefix mariadb)/support-files/my-large.cnf /usr/local/etc/my.cnf
-mysql.server start
-sudo brew services start mariadb
+brew services start mariadb
 $(brew --prefix mariadb)/bin/mysql_secure_installation
 mysql -u root -p <<EOF
 use mysql;
@@ -112,20 +113,14 @@ CREATE USER 'bnjns'@'localhost' IDENTIFIED BY '$PASSWORD';
 GRANT ALL PRIVILEGES ON *.* TO 'bnjns'@'localhost' WITH GRANT OPTION;
 EOF
 mkdir -p /usr/local/var/run/php
-chmod -R ug+w /usr/local/Cellar/php55/5.5*/lib/php
 chmod -R ug+w /usr/local/Cellar/php56/5.6*/lib/php
 chmod -R ug+w /usr/local/Cellar/php70/7.0*/lib/php
 chmod -R ug+w /usr/local/Cellar/php71/7.1*/lib/php
 chmod -R ug+w /usr/local/Cellar/php72/7.2*/lib/php
-ln -s /usr/local/opt/php55/bin/php /usr/local/bin/php55
-ln -s /usr/local/opt/php56/bin/php /usr/local/bin/php56
-ln -s /usr/local/opt/php70/bin/php /usr/local/bin/php70
-ln -s /usr/local/opt/php72/bin/php /usr/local/bin/php72
-brew services start php55
-brew services start php56
-brew services start php70
-brew services start php71
-brew services start php72
+brew services start php@5.6
+brew services start php@7.0
+brew services start php@7.1
+brew services start php@7.2
 sudo brew services start nginx
 
 # Enable pip as a direct command
