@@ -1,4 +1,4 @@
-#!/usr/bash
+#!/usr/bin/env bash
 
 sudo apt update
 sudo apt install ubuntu-budgie-desktop
