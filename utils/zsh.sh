@@ -49,7 +49,7 @@ function read-awsmfa-credentials {
   export AWS_SESSION_TOKEN="$(aws configure get aws_session_token --profile default)"
 }
 
-function aws-set-profile() {
+function aws-set-profile {
   unset AWS_PROFILE
   unset PROFILE_ARGS
 
