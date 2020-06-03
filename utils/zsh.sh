@@ -10,7 +10,7 @@ ZSH_THEME="avit"
 
 export PATH="$HOME/.local/bin:$HOME/.rbenv/bin:/opt/flutter/bin:$PATH"
 export SDKMAN_DIR="/home/bnjns/.sdkman"
-export AWS_MFA_SERIAL_NUMBER="arn:aws:iam::898005449250:mfa/Ben.Jones.nonprod"
+export AWS_MFA_SERIAL_NUMBER=""
 export AWS_TMP_CREDENTIALS_FILE=/tmp/aws_creds.json
 
 function dotenv {
